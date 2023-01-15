@@ -7,7 +7,6 @@ class Vector {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.color = [random(255), random(255), random(255)];
         this.id = Vector.identify(this)
     }
 
