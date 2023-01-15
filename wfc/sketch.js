@@ -2,8 +2,9 @@ var grid;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	grid = new Grid(new Vector(windowWidth, windowHeight), new Vector(10, 5));
-	// put setup code here
+	noStroke();
+
+	grid = new Grid(new Vector(windowWidth, windowHeight), new Vector(30, 20));
 	console.log(grid)
 }
 
