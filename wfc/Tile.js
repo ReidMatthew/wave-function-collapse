@@ -8,18 +8,37 @@ class Tile {
         this.pos = pos;
         this.origin = origin;
         this.dim = dim;
-        this.color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
-        this.states = states;
-        this.id = pos.id;
+        this.color = [Math.floor(Math.random() * 50 + 80)];
+        // this.color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
+        this.states = [...states];
+
+        this.collapsed = false;
         this.state = this.states[Math.floor(Math.random() * this.states.length)];
+
+        this.id = pos.id;
     }
 
     show() {
-        // if (this.state.flipType) {
-        //     fill(this.color);
-        //     rect(this.origin.x, this.origin.y, this.dim.x, this.dim.y);
-        // }
+        fill(this.color);
+        rect(this.origin.x, this.origin.y, this.dim.x, this.dim.y);
 
-        this.state.show(this.origin, this.dim)
+        this.state.show(this.origin, this.dim);
+    }
+
+    entropy() {
+        return this.states.length;
+    }
+
+    reduceEntropy() {
+        this.states.shift();
+
+        if (this.entropy() === 1)
+            this.collapse();
+    }
+
+    collapse() {
+        this.collapsed = true;
+        this.state = this.states.pop();
+        this.color = "pink"
     }
 }

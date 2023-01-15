@@ -1,4 +1,11 @@
 class State {
+    /**
+     * @param {Image} img 
+     * @param {[string]} pattern 
+     * @param {number} rotationType 
+     * @param {boolean} flipType 
+     * @param {string} id 
+     */
     constructor(img, pattern, rotationType, flipType, id) {
         this.img = img;
         this.pattern = pattern;
@@ -8,6 +15,10 @@ class State {
         this.id = id ?? State.identify(pattern);
     }
 
+    /**
+     * @param {Vector} pos 
+     * @param {Vector} dim 
+     */
     show(pos, dim) {
         push();
         translate(pos.x + dim.x / 2, pos.y + dim.y / 2);
@@ -32,9 +43,8 @@ class State {
                     id = State.identify(s.pattern);
                     if (!ids.includes(id)) {
                         ids.push(id);
-                        tempStates.push(new State(s.img, s.pattern, r, f, id));
+                        tempStates.push(new State(s.img, [...s.pattern], r, f, id));
                     }
-
                     s.pattern.unshift(s.pattern.pop()); // handles rotations
                 }
                 s.pattern.reverse(); // handles flips
@@ -42,8 +52,6 @@ class State {
 
             return tempStates;
         });
-
-        console.log(states)
     }
 
     static identify(p) {
