@@ -24,6 +24,29 @@ class Grid {
         }
     }
 
+    collapseLowest() {
+
+    }
+
+    checkEntropy() {
+        let lowest = this.tiles[0][0].entropy(),
+            tileSet = [];
+        this.tiles.forEach(a => {
+            a.forEach(t => {
+                if (t.collapsed) return;
+
+                if (t.entropy() === lowest)
+                    tileSet.push(t);
+                if (t.entropy() < lowest) {
+                    lowest = t.entropy();
+                    tileSet = [t];
+                }
+            })
+        })
+
+        return tileSet;
+    }
+
     inside(v) {
         return this.tiles[Math.floor(v.y / this.tileDim.y)][Math.floor(v.x / this.tileDim.x)];
     }
