@@ -17,8 +17,6 @@ class Grid {
     }
 
     init() {
-        let states = State.initSet();
-        
         for (let i = 0; i < this.tileLayout.y; i++) {
             this.tiles.push([]);
             for (let j = 0; j < this.tileLayout.x; j++)

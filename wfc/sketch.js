@@ -1,16 +1,19 @@
-var grid, imgs = [];
+var grid, states = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	noStroke();
 
-	grid = new Grid(new Vector(windowWidth, windowHeight), new Vector(30, 20));
-	console.log(grid)
+	State.init();
+	imageMode(CENTER);
+	console.log(states.map(s => s.rotationType))
+	grid = new Grid(new Vector(windowWidth, windowHeight), new Vector(15, 15));
+	console.log(grid);
 }
 
 function draw() {
+	background(100)
 	grid.show()
-	image(imgs[0], grid.tileDim.x * 2, grid.tileDim.y * 2, grid.tileDim.x, grid.tileDim.y)
 }
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= HELPERS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= \\
@@ -19,8 +22,24 @@ function mouseClicked(event) {
 	let t = grid.inside(new Vector(mouseX, mouseY));
 	console.log(t);
 	t.color = "white"
+	t.state.rotationType++;
+	t.state.rotation = t.state.rotationType * Math.PI / 2;
 }
 
 function preload() {
-	imgs.push(loadImage('tiles/bbbb.png'));
+	states.push({ img: loadImage('tiles/bbbb.png'), pattern: ["b", "b", "b", "b"] });
+	states.push({ img: loadImage('tiles/bbbr.png'), pattern: ["b", "b", "b", "r"] });
+	states.push({ img: loadImage('tiles/bbrr.png'), pattern: ["b", "b", "r", "r"] });
+	states.push({ img: loadImage('tiles/brbr.png'), pattern: ["b", "r", "b", "r"] });
+	states.push({ img: loadImage('tiles/brrr.png'), pattern: ["b", "r", "r", "r"] });
+	states.push({ img: loadImage('tiles/gbgb.png'), pattern: ["g", "b", "g", "b"] });
+	states.push({ img: loadImage('tiles/gbgr.png'), pattern: ["g", "b", "g", "r"] });
+	states.push({ img: loadImage('tiles/gbrb.png'), pattern: ["g", "b", "r", "b"] });
+	states.push({ img: loadImage('tiles/gbrr.png'), pattern: ["g", "b", "r", "r"] });
+	states.push({ img: loadImage('tiles/gggg.png'), pattern: ["g", "g", "g", "g"] });
+	states.push({ img: loadImage('tiles/grgg.png'), pattern: ["g", "r", "g", "g"] });
+	states.push({ img: loadImage('tiles/grgr.png'), pattern: ["g", "r", "g", "r"] });
+	states.push({ img: loadImage('tiles/grrg.png'), pattern: ["g", "r", "r", "g"] });
+	states.push({ img: loadImage('tiles/grrr.png'), pattern: ["g", "r", "r", "r"] });
+	states.push({ img: loadImage('tiles/rrrr.png'), pattern: ["r", "r", "r", "r"] });
 }
