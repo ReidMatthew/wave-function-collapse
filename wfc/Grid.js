@@ -17,10 +17,12 @@ class Grid {
     }
 
     init() {
+        let states = State.initSet();
+        
         for (let i = 0; i < this.tileLayout.y; i++) {
             this.tiles.push([]);
             for (let j = 0; j < this.tileLayout.x; j++)
-                this.tiles[i].push(new Tile(new Vector(j, i), new Vector(this.tileDim.x * j, this.tileDim.y * i), this.tileDim));
+                this.tiles[i].push(new Tile(new Vector(j, i), new Vector(this.tileDim.x * j, this.tileDim.y * i), this.tileDim, states));
         }
     }
 
