@@ -22,11 +22,10 @@ function mouseClicked(event) {
 	let t = grid.inside(new Vector(mouseX, mouseY));
 	console.log(t);
 	if (!t.collapsed)
-		t.color = "white";
+		t.reduceEntropy();
 
-	t.reduceEntropy();
-
-	console.log(grid.checkEntropy());
+	t.assessEdges();
+	grid.collapseLowest();
 }
 
 function preload() {

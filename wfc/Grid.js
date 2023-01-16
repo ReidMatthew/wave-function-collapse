@@ -22,10 +22,33 @@ class Grid {
             for (let j = 0; j < this.tileLayout.x; j++)
                 this.tiles[i].push(new Tile(new Vector(j, i), new Vector(this.tileDim.x * j, this.tileDim.y * i), this.tileDim, states));
         }
+
+        this.setTileNeighboors();
     }
 
-    collapseLowest() {
+    setTileNeighboors() {
+        let a;
 
+        for (let y = 0; y < this.tiles.length; y++) {
+            for (let x = 0; x < this.tiles[0].length; x++) {
+                a = [false, false, false, false];
+
+                try { a[0] = this.tiles[y - 1][x] } catch (e) { }
+                try { a[1] = this.tiles[y][x + 1] } catch (e) { }
+                try { a[2] = this.tiles[y + 1][x] } catch (e) { }
+                try { a[3] = this.tiles[y][x - 1] } catch (e) { }
+
+                this.tiles[y][x].neighboor = a;
+            }
+        }
+    }
+
+    // this is the function that should probably use recursion
+    collapseLowest() {
+        let lowest = this.checkEntropy();
+
+        if (lowest)
+            lowest[Math.floor(Math.random() * lowest.length)].collapse();
     }
 
     checkEntropy() {
