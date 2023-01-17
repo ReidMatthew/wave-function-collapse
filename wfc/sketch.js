@@ -1,4 +1,4 @@
-var grid, states = [];
+var grid, states = [], stack = [];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
